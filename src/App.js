@@ -1,18 +1,15 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
-import Directory from './components/DirectoryComponent';
+import Main from './components/MainComponent';
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar className="app">
-      <div className="container">
-        <NavbarBrand href="/">NuCamp</NavbarBrand>
-      </div>
-      </Navbar>
-      <Directory />
-    </div>
-  );
+class App extends Component {
+  render() {
+      return (
+          <div className="App">
+              <Main />
+          </div>
+      );
+  }
 }
 
 export default App;
