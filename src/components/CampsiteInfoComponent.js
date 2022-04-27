@@ -1,6 +1,76 @@
-import React from "react";
-import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import React, { Component } from 'react';
+import { Select, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control } from 'react-redux-form';
+// import { FontAwesomeIcon } from '@fortawesome/fontawesome-free';
+
+
+// I have been very sick this weekend and have been having issues with brain fog as a result.
+// I have partially completed the assigment to what I am able to at the moment.
+// Next week when I am feeling better I will finish the assignment
+
+class CommentForm extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        isModalOpen: false
+    };
+
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal() {
+    this.setState({
+        isModalOpen: !this.state.isModalOpen
+    });
+  }
+
+  submitComment() {
+    this.setState({
+        isModalOpen: !this.state.isModalOpen
+    });
+    alert(this.state.rating)
+  }
+
+  render() {
+    return(
+      <>
+        <Button outline className="fa-lg" onClick={this.toggleModal}>
+          {/* <FontAwesomeIcon className="fa-solid fa-pen" /> */}
+          Submit Comment
+        </Button>
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                    <ModalBody>
+                        <Form onSubmit={this.handleLogin}>
+                            <FormGroup>
+                                <Label htmlFor=".rating">Rating</Label>
+                                <Control.select model="rating" id="rating">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                </Control.select>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor=".author">Author</Label>
+                                <Control.text model="author" type="text" id="author" name="author"/>
+                            </FormGroup>
+                            <FormGroup check>
+                              <Label htmlFor="text">Comment</Label>
+                                <Control.textarea model=".text" type="textarea" name="text" id="text"/>
+                            </FormGroup>
+                            <Button color="primary" onClick={this.submitComment}>Submit Comment</Button>
+                        </Form>
+                    </ModalBody>
+                </Modal>
+      </>
+    )
+  }
+}
 
 function RenderCampsite({campsite}) {
   return (
@@ -28,6 +98,7 @@ function RenderComments({comments}){
             </p>
           )
         }
+        <CommentForm></CommentForm>
       </div>
     );
   }
